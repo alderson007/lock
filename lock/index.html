@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Lockscreen</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgb(0, 0, 0);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgb(0, 0, 0);
+            width: 400px;
+            transition: opacity 0.3s ease;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4ade80;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+
+        #loading {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        #loading img {
+            height: 80vh;
+        }
+
+        .red-bar {
+            width: 0;
+            height: 10px;
+            background: red;
+            margin: 20px auto 0;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="question-container">
+        <img src="/red-lock.webp" alt="Lock Image" style="width: 100px;">
+        <h1 id="question">Who are you?</h1>
+        <input type="text" id="input-field" placeholder="Type here..." />
+        <button onclick="submitAnswer()">Submit</button>
+        <p id="error" class="error"></p>
+    </div>
+
+    <div id="loading">
+        <img src="/mr-robot.gif" alt="Loading...">
+        <div class="red-bar" id="red-bar"></div>
+    </div>
+
+    <script>
+        let stage = 1;
+
+        function submitAnswer() {
+            const input = document.getElementById("input-field").value.trim();
+            const error = document.getElementById("error");
+            const question = document.getElementById("question");
+            const container = document.getElementById("question-container");
+
+            error.textContent = "";
+
+            if (stage === 1) {
+                if (input.toLowerCase() === "rasekh") {
+                    stage = 2;
+                    question.textContent = "Enter the password to your safe Mr. Anonymous";
+                    document.getElementById("input-field").value = "";
+                } else {
+                    displayAccessDenied(container);
+                }
+            } else if (stage === 2) {
+                if (input === "rasekhroxturkeyx") {
+                    showLoading();
+                } else {
+                    displayAccessDenied(container);
+                }
+            }
+        }
+
+        function showLoading() {
+            document.getElementById("question-container").style.display = "none";
+            document.getElementById("loading").style.display = "block";
+
+            const redBar = document.getElementById("red-bar");
+            let width = 0;
+
+            const interval = setInterval(() => {
+                width += 2;
+                redBar.style.width = width + "%";
+
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        window.location.href = "https://drive.google.com/drive/folders/1Ew6_Ac1hS4uywRKKVPGW47VxdmK7ahFy?usp=sharing";
+                    }, 1000);
+                }
+            }, 200);
+        }
+
+        function displayAccessDenied(container) {
+            container.style.opacity = "0"; // Temporarily hide the form box
+            setTimeout(() => {
+                container.style.display = "none"; // Fully hide the form box
+                document.body.innerHTML += `
+                    <div style="text-align: center;">
+                        <img src="/ad.gif" alt="Access Denied" style="width: 50%;">
+                    </div>`;
+            }, 300);
+        }
+
+        // Allow "Enter" key to work
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                submitAnswer();
+            }
+        });
+        // Disable right-click
+document.addEventListener("contextmenu", (event) => event.preventDefault());
+
+// Disable F12 and DevTools
+document.addEventListener("keydown", (event) => {
+    if (
+        event.key === "F12" ||
+        (event.ctrlKey && event.shiftKey && event.key === "I")
+    ) {
+        event.preventDefault();
+    }
+});
+
+    </script>
+</body>
+</html>
