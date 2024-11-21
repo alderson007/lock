@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Lockscreen</title>
+    <link>
+    <title>Safe</title>
     <style>
         body {
             margin: 0;
@@ -89,7 +90,7 @@
 </head>
 <body>
     <div class="container" id="question-container">
-        <img src="/red-lock.webp" alt="Lock Image" style="width: 100px;">
+        <img src="red-lock.webp" alt="Lock Image" style="width: 100px;">
         <h1 id="question">Who are you?</h1>
         <input type="text" id="input-field" placeholder="Type here..." />
         <button onclick="submitAnswer()">Submit</button>
@@ -97,7 +98,7 @@
     </div>
 
     <div id="loading">
-        <img src="/mr-robot.gif" alt="Loading...">
+        <img src="mr-robot.gif" alt="Loading...">
         <div class="red-bar" id="red-bar"></div>
     </div>
 
@@ -155,7 +156,7 @@
                 container.style.display = "none"; // Fully hide the form box
                 document.body.innerHTML += `
                     <div style="text-align: center;">
-                        <img src="/ad.gif" alt="Access Denied" style="width: 50%;">
+                        <img src="ad.gif" alt="Access Denied" style="width: 50%;">
                     </div>`;
             }, 300);
         }
