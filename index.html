@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="red-lock.ico" href="red-lock.ico">
-    <title>Safe</title>
+    <link rel="icon" type="red-lock.ico" href="red-lock.webp">
+    <title>Secure Safe</title>
     <style>
+        /* Base styles for body */
         body {
             margin: 0;
             padding: 0;
@@ -19,17 +20,19 @@
             overflow: hidden;
         }
 
+        /* Glass effect container */
         .container {
             text-align: center;
-            background: rgb(0, 0, 0);
-            backdrop-filter: blur(10px);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgb(0, 0, 0);
-            width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            width: 350px;
             transition: opacity 0.3s ease;
         }
 
+        /* Input and button styles */
         input {
             width: 90%;
             padding: 10px;
@@ -38,6 +41,7 @@
             border-radius: 5px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
+            text-align: center;
         }
 
         button {
@@ -55,6 +59,7 @@
             background: #16a34a;
         }
 
+        /* Loading screen styles */
         #loading {
             display: none;
             position: absolute;
@@ -78,6 +83,7 @@
             margin: 20px auto 0;
         }
 
+        /* Error and hidden styles */
         .error {
             color: red;
             margin-top: 10px;
@@ -89,19 +95,22 @@
     </style>
 </head>
 <body>
+    <!-- Question Container -->
     <div class="container" id="question-container">
-        <img src="red-lock.webp" alt="Lock Image" style="width: 100px;">
+        <img src="red-lock.webp" alt="Lock Image" style="width: 100px; margin-bottom: 20px;">
         <h1 id="question">Who are you?</h1>
-        <input type="text" id="input-field" placeholder="Type here..." />
+        <input type="text" id="input-field" placeholder="Type your answer here..." />
         <button onclick="submitAnswer()">Submit</button>
         <p id="error" class="error"></p>
     </div>
 
+    <!-- Loading Screen -->
     <div id="loading">
         <img src="mr-robot.gif" alt="Loading...">
         <div class="red-bar" id="red-bar"></div>
     </div>
 
+    <!-- Scripts -->
     <script>
         let stage = 1;
 
@@ -116,7 +125,7 @@
             if (stage === 1) {
                 if (input.toLowerCase() === "rasekh") {
                     stage = 2;
-                    question.textContent = "Enter the password to your safe Mr. Anonymous";
+                    question.textContent = "Enter the password to your safe, Mr. Anonymous:";
                     document.getElementById("input-field").value = "";
                 } else {
                     displayAccessDenied(container);
@@ -156,7 +165,7 @@
                 container.style.display = "none"; // Fully hide the form box
                 document.body.innerHTML += `
                     <div style="text-align: center;">
-                        <img src="ad.gif" alt="Access Denied" style="width: 50%;">
+                        <img src="ad.gif" alt="Access Denied" style="width: 50%; margin-top: 20vh;">
                     </div>`;
             }, 300);
         }
@@ -167,19 +176,14 @@
                 submitAnswer();
             }
         });
-        // Disable right-click
-document.addEventListener("contextmenu", (event) => event.preventDefault());
 
-// Disable F12 and DevTools
-document.addEventListener("keydown", (event) => {
-    if (
-        event.key === "F12" ||
-        (event.ctrlKey && event.shiftKey && event.key === "I")
-    ) {
-        event.preventDefault();
-    }
-});
-
+        // Disable right-click and F12
+        document.addEventListener("contextmenu", (event) => event.preventDefault());
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
